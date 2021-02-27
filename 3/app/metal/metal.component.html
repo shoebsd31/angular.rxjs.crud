@@ -1,0 +1,147 @@
+
+  <table
+  mat-table
+  [dataSource]="metalService.list"
+  class="mat-elevation-z8"
+>
+  <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef>Symbol</th>
+    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+  </ng-container>
+
+  <!-- price Column -->
+  <ng-container matColumnDef="avg_price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let element">{{ element.avg_price }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-card>
+  <form [formGroup]="options" (ngSubmit)="onSubmit()" name="addMetal">
+    <mat-form-field appearance="fill">
+      <mat-label>Id</mat-label>
+      <input
+        matInput
+        name="id"
+        [(ngModel)]="metal.id"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        name="name"
+        [(ngModel)]="metal.name"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Symbol</mat-label>
+      <input
+        matInput
+        name="symbol"
+        [(ngModel)]="metal.symbol"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        name="avg_price"
+        [(ngModel)]="metal.avg_price"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add</button>
+  </form>
+  <br />
+  <hr />
+
+  <form [formGroup]="options">
+    <mat-form-field appearance="fill">
+      <mat-label>Id</mat-label>
+      <input
+        matInput
+        name="id"
+        [(ngModel)]="searchId"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      (click)="findById(searchId)"
+      color="primary"
+    >
+      Find By ID
+    </button>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Symbol</mat-label>
+      <input
+        matInput
+        name="symbol"
+        [(ngModel)]="searchSymbol"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      (click)="findBySymbol(searchSymbol)"
+      color="primary"
+    >
+      Find By Symbol
+    </button>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        name="name"
+        [(ngModel)]="searchName"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      (click)="findByName(searchName)"
+      color="primary"
+    >
+      Find By Name
+    </button>
+
+    <h5>Search Result : </h5>
+    <p *ngIf="foundMetal">
+      Id : {{ foundMetal.id }} Name : {{ foundMetal.name }} Symbol :
+      {{ foundMetal.symbol }} price : {{ foundMetal.avg_price }}
+    </p>
+    <button mat-raised-button (click)="delete(foundMetal)" color="primary">
+      Delete
+    </button>
+  </form>
+</mat-card>
