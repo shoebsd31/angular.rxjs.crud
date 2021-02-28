@@ -3,12 +3,12 @@ import { BaseStore } from "./base_store";
 export class BaseWallet extends BaseStore{
     
     private is_default: boolean = false;
-    private name: string = "";
-    
+    private name: string = "";    
+    private deleted: boolean = false;
     constructor(id: string, is_default: boolean, name: string, balance: string ) {
         super(balance); 
         this.is_default = is_default;
-        this.name=name;        
+        this.name=name;     
     }
 
   
