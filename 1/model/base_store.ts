@@ -7,14 +7,6 @@ export class BaseStore extends BaseWalletModel{
         super();
         this.balance=balance;
     }
-
-    public getId(){
-        return this.getId();
-    }
-
-    public setId(id: any){
-        return this.setId(id);
-    }
     
     public reduceBalance(amount: number): void {
         //todo implement me
