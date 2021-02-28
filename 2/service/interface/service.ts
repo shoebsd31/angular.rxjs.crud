@@ -1,14 +1,4 @@
 import { BehaviorSubject } from "rxjs";
-import {
-  filter,
-  map,
-  mergeAll,
-  reduce,
-  switchMap,
-  take,
-  tap,
-  toArray,
-} from "rxjs/operators";
 import { Model } from "../../model/interface/model";
 
 export abstract class Service<M extends Model> {
